@@ -8,7 +8,6 @@ use Illuminate\Http\Response;
 use App\Http\Requests;
 
 use App\Store;
-use App\Articles;
 
 class StoresController extends Controller
 {

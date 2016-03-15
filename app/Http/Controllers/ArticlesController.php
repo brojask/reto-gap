@@ -8,17 +8,20 @@ use Illuminate\Http\Response;
 use App\Http\Requests;
 	
 use App\Article;
-use App\Stores;
+
 
 
 
 class ArticlesController extends Controller
 {
+
+
     function index() {
-    	$articles = Article::all(); //Not a good idea
+    	$articles = Article::all();
     	if(!$articles){
-    		return response(['success' => true, 'error_code'=>404, 'error_msg'=>'Record not found', 404]);    		
+    		return response(['success' => false, 'error_code'=>404, 'error_msg'=>'Record not found', 404]);    		
     	}
+    	#return response(['success' => true, 'articles'=>$this->transformCollection($articles)], 200);
     	return response(['success' => true, 'articles'=>$this->transformCollection($articles)], 200);
     	
     }
@@ -27,7 +30,7 @@ class ArticlesController extends Controller
         $article = Article::find($id);
  
         if(!$article){
-            return response(['success' => true, 'error_code'=>404, 'error_msg'=>'Record not found', 404]);    	
+            return response(['success' => false, 'error_code'=>404, 'error_msg'=>'Record not found', 404]);    	
         }
  		return response(['success' => true, 'article'=>$this->transform($article), 200]);    	
 

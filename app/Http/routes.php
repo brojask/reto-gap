@@ -30,6 +30,8 @@ Route::group(['middleware' => ['web']], function () {
     //
 });
 
+Route::get('article/edit/{$1}', 'ArticlesController@show');
+
 Route::group(['prefix' => 'services'], function(){
 	Route::resource('stores', 'StoresController');
 	Route::resource('articles', 'ArticlesController');

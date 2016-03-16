@@ -11,9 +11,9 @@
 |
 */
 
-Route::get('/', function () {
+/*Route::get('/', function () {
     return view('welcome');
-});
+});*/
 
 /*
 |--------------------------------------------------------------------------
@@ -30,9 +30,21 @@ Route::group(['middleware' => ['web']], function () {
     //
 });
 
-Route::get('article/edit/{$1}', 'ArticlesController@show');
-
 Route::group(['prefix' => 'services'], function(){
+	
+
+	Route::get('articles/stores/{id}', 'ArticlesController@getStores')->where('id', '[0-9]+');
 	Route::resource('stores', 'StoresController');
 	Route::resource('articles', 'ArticlesController');
+
+	
+	#Route::resource('list-articles', 'ArticlesController@listArticles');
 });
+
+Route::resource('articles', 'ArticlesController');
+Route::get('/', 'ArticlesController@listArticles');
+Route::get('articles/edit/{id}', 'ArticlesController@editArticles');
+
+Route::resource('stores', 'StoresController');
+Route::get('/list-stores', 'StoresController@listStores');
+Route::get('stores/edit/{id}', 'StoresController@editStores');

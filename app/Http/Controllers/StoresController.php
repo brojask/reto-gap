@@ -9,6 +9,9 @@ use App\Http\Requests;
 
 use App\Store;
 
+use Session;
+use Redirect;
+
 class StoresController extends Controller
 {
     function index() {
@@ -46,4 +49,24 @@ class StoresController extends Controller
 	           'name' => $store['name']
 	        ];
 	}
+
+	function listStores(){
+		$stores = Store::all(); //Not a good idea
+		return view('stores.index', ['stores' => $stores] );
+	}
+
+    function editStores($id) {
+    	$article = Store::find($id);
+    	return view('stores.edit', ['store'=>$article]);
+    }
+
+    function update(Request $request, $id){
+    	$joke = Store::find($id);
+        $joke->name = $request->name;
+        $joke->address = $request->address;
+        //$joke->price = $request->user_id;
+        $joke->save();
+        Session::flash('message','Article Updated!');
+        return Redirect::to('stores/edit/'.$id);
+    }
 }

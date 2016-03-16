@@ -3,7 +3,10 @@
 @section('title', 'Stores')
 
 @section('content')
-	<h1>Stores</h1>
+@include('alerts.message')
+	<h1>Stores</h1>	
+	<hr>
+	<a href="stores/create" class="btn btn-danger btn-block">Add New</a>
 	<hr>
 	@foreach($stores as $store)
 	<div class="panel panel-danger">

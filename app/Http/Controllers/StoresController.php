@@ -69,4 +69,13 @@ class StoresController extends Controller
         Session::flash('message','Article Updated!');
         return Redirect::to('stores/edit/'.$id);
     }
+    function create() {
+        
+        return view( 'stores.create' );
+    }
+    function store(Request $request){
+        $joke = Store::create($request->all());
+        Session::flash('message','Store Created!');
+        return Redirect::to('list-stores');
+    }
 }

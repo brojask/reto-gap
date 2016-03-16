@@ -4,6 +4,9 @@
 
 @section('content')
     <h1>Articles</h1>
+	<hr>
+	<a href="articles/create" class="btn btn-success btn-block">Add New</a>
+	<hr>
     <hr>
 	@foreach($articles as $article)
 	<div class="panel panel-success">

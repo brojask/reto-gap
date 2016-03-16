@@ -1,0 +1,27 @@
+<h1>Articles</h1>
+<div class="input-group input-group-lg">
+	<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+	<input type="text" class="form-control" placeholder="Search..." ng-model="search">	
+</div>
+<hr>
+<div class="panel panel-success" ng-repeat="article in articles | filter:search">
+	  <!-- Default panel contents -->
+  <div class="panel-heading">{{article.name}}</div>
+  <div class="panel-body">
+    <p>{{article.description}}</p>
+    <!-- List group -->
+  <ul class="list-inline">
+  	<li><strong>ID:</strong> {{article.id}}</li>
+    <li><strong>Price:</strong> {{article.price}}</li>
+    <li><strong>In Shelf:</strong> {{article.total_in_shelf}}</li>
+    <li><strong>In Vault:</strong> {{article.total_in_vault}}</li>
+    <li><strong>Store Name:</strong> <a href="#">{{article.store_name}}</a></li>
+  </ul>	
+  </div>
+
+    
+  <div class="modal-footer">
+  	<a href="#/articles/edit/{{article.id}}" class="btn btn-success pull-right">Edit</a>
+  </div>
+
+</div>

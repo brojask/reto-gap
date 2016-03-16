@@ -1,0 +1,23 @@
+<h1>Stores</h1>
+<div class="input-group input-group-lg">
+	<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+	<input type="text" class="form-control" placeholder="Search..." ng-model="search">	
+</div>
+<hr>
+<div class="panel panel-success" ng-repeat="store in stores | filter:search">
+	  <!-- Default panel contents -->
+  <div class="panel-heading">{{store.name}}</div>
+  <div class="panel-body">
+    <p>{{store.address}}</p>
+    <!-- List group -->
+  <ul class="list-inline">
+  	<li><strong>ID:</strong> {{store.id}}</li>    
+  </ul>	
+  </div>
+
+    
+  <div class="modal-footer">
+  	<a href="stores/edit/{{store.id}}" class="btn btn-success pull-right">Edit</a>
+  </div>
+
+</div>

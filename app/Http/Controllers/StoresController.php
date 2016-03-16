@@ -66,8 +66,9 @@ class StoresController extends Controller
         $joke->address = $request->address;
         //$joke->price = $request->user_id;
         $joke->save();
-        Session::flash('message','Article Updated!');
-        return Redirect::to('stores/edit/'.$id);
+        return response(['success' => true, 'msg'=>'Updated', 200]); 
+        #Session::flash('message','Article Updated!');
+        #return Redirect::to('stores/edit/'.$id);
     }
     function create() {
         

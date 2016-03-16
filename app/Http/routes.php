@@ -30,17 +30,17 @@ Route::group(['middleware' => ['web']], function () {
     //
 });
 
-Route::group(['prefix' => 'services'], function(){
-	
+Route::group(['middleware'=>'simpleauth','prefix' => 'services'], function(){	
 
+	// only numeric params
 	Route::get('articles/stores/{id}', 'ArticlesController@getStores')->where('id', '[0-9]+');
-	Route::resource('stores', 'StoresController');
-	Route::resource('articles', 'ArticlesController');
 
-	
-	#Route::resource('list-articles', 'ArticlesController@listArticles');
+	//API - Angular use
+	Route::resource('stores', 'StoresController');
+	Route::resource('articles', 'ArticlesController');	
 });
 
+//Frontend - Laravel + jQuery
 Route::resource('articles', 'ArticlesController');
 Route::get('/', 'ArticlesController@listArticles');
 Route::get('articles/edit/{id}', 'ArticlesController@editArticles');

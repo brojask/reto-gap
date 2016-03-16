@@ -68,5 +68,7 @@
                             @yield('content')
                         </div>
                     </div>
+                    {!! Html::script('bower_components/jquery/dist/jquery.min.js') !!}
+                    {!! Html::script('js/scripts.js') !!}
                 </body>
             </html>

@@ -1,27 +1,42 @@
+<h1>{{$parent.settings.title}}</h1>
+<div class="alert alert-success alert-dismissible" role="alert" ng-show="$parent.settings.success">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  {{$parent.settings.success}}
+</div>
 <div class="form-group">
-		<label for="name">Name:</label>
-		<input type="text" class="form-control" ng-model="article.name" ></input>		
-	</div>
-	<div class="form-group">
-		<label for="name">Description:</label>
-		<input type="text" class="form-control" ng-model="article.description" ></input>		
-	</div>
-	<div class="form-group">
-		<label for="name">Price:</label>
-		<input type="text" class="form-control" ng-model="article.price" ></input>		
-	</div>
-	<div class="form-group">
-		<label for="name">In Shelf:</label>
-		<input type="text" class="form-control" ng-model="article.total_in_shelf" ></input>		
-	</div>
-	<div class="form-group">
-		<label for="name">In Vault:</label>
-		<input type="text" class="form-control" ng-model="article.total_in_vault" ></input>		
-	</div>	
-	<div class="form-group">
-		<label for="name">Store Name:</label>
-		<input type="text" class="form-control" ng-model="article.store_name" ></input>		
-	</div>
-	<div class="form-group text-center">
-		<button class="btn btn-success btn-lg">Submit</button>
-	</div>
+	<label for="name">Name:</label>
+	<input type="text" class="form-control" ng-model="article.name" ></input>		
+</div>
+<div class="form-group">
+	<label for="name">Description:</label>
+	<input type="text" class="form-control" ng-model="article.description" ></input>		
+</div>
+<div class="form-group">
+	<label for="name">Price:</label>
+	<input type="text" class="form-control" ng-model="article.price" ></input>		
+</div>
+<div class="form-group">
+	<label for="name">In Shelf:</label>
+	<input type="text" class="form-control" ng-model="article.total_in_shelf" ></input>		
+</div>
+<div class="form-group">
+	<label for="name">In Vault:</label>
+	<input type="text" class="form-control" ng-model="article.total_in_vault" ></input>		
+</div>	
+<!--<div class="form-group">
+	<label for="name">Store Name:</label>
+	<input type="text" class="form-control" ng-model="article.store_name" ></input>		
+</div>-->
+<!--<div class="form-group">
+	<label for="name">Store Name:</label>
+	<select ng-model="article.store_name" ng-options="store.name for store in stores track by article.store_id" class="form-control">	      
+	</select>
+</div>-->
+<div class="form-group">
+	<label for="name">Store Name:</label>
+	<select ng-model="article.store_id" ng-options="store.id as store.name for store in stores" class="form-control">	      
+	</select>
+</div>
+<div class="form-group text-center">
+	<button class="btn btn-success btn-lg" ng-click="submit($parent.article)">{{$parent.settings.action}} <i class="glyphicon glyphicon-chevron-right"></i></button>
+</div>

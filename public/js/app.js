@@ -17,7 +17,11 @@ var app = angular.module('app',['ngRoute','ngResource'])
 	.when("/stores/edit/:id", {
 		controller: "EditStoresController",
 		templateUrl: "templates/stores-form.html"
-	})	
+	})
+	.when("/articles/stores/:id", {
+		controller: "ArticlesStoresController",
+		templateUrl: "templates/articles-stores.html"
+	})
 	.otherwise({redirectTo: '/'});
 }])
 
@@ -27,17 +31,45 @@ var app = angular.module('app',['ngRoute','ngResource'])
 	});
 })
 .controller('CreateStoresArticlesController', function($scope){
-
+		$scope.settings = {
+		title: 'Create Article',
+		action:'Create'
+	}	
+	$scope.article = {
+		name :'',
+		description:'',
+		price: '',
+		total_in_shelf: '',
+		total_in_vault:'',
+		store_name:''
+	};
+	$scope.submit = function(){
+		ArticlesService.save($scope.article).$promise.then(function(data){
+			if(data.msg){
+				angular.copy({}, $scope.video);
+				$scope.settings.success = "Article created!";
+			}
+		})
+	}
 })
-.controller('EditArticlesController', function($scope, $routeParams, ArticlesService){	
+.controller('EditArticlesController', function($scope, $routeParams, ArticlesService,StoresService){	
 	$scope.settings = {
 		title: 'Edit Article',
 		action:'Edit'
 	}
-	ArticlesService.get({id: $routeParams.id}, function(data){
-		console.log(data.article);
+	ArticlesService.get({id: $routeParams.id}, function(data){		
 		$scope.article = data.article;
 	});
+	StoresService.get(function(data){		
+		$scope.stores = data.stores;
+	});
+	$scope.submit = function(){
+		ArticlesService.update({id: $scope.article.id}, $scope.article).$promise.then(function(data){			
+			if(data.success){				
+				$scope.settings.success = "Article updated!";
+			}
+		})
+	}
 })
 
 .controller('StoresController', function($scope, StoresService){
@@ -48,9 +80,15 @@ var app = angular.module('app',['ngRoute','ngResource'])
 .controller('CreateStoresController', function($scope){
 
 })
-.controller('EditStoresController', function($scope, $routeParams){
+.controller('EditStoresController', function($scope, $routeParams, StoresService){
 	StoresService.get({id: $routeParams.id}, function(data){		
 		$scope.store = data.store;		
+	});
+})
+
+.controller('ArticlesStoresController', function($scope, $routeParams, ArticlesStoresService){
+	ArticlesStoresService.get({id: $routeParams.id}, function(data){		
+		$scope.articles = data.articles;	
 	});
 })
 
@@ -61,6 +99,11 @@ var app = angular.module('app',['ngRoute','ngResource'])
 })
 .factory('StoresService',function($resource,API_URL){
 	return $resource(API_URL+'stores/:id', {id: "@id"}, {
+		update: { method: 'PUT', params: {id:"@id"} }
+	});
+})
+.factory('ArticlesStoresService',function($resource,API_URL){
+	return $resource(API_URL+'articles/stores/:id', {id: "@id"}, {
 		update: { method: 'PUT', params: {id:"@id"} }
 	});
 })
